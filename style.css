@@ -1,0 +1,463 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Caveat', 'Dancing Script', 'Indie Flower', cursive;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Hiệu ứng nền lung linh */
+.sparkles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.sparkle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #fff;
+    border-radius: 50%;
+    animation: sparkle 3s infinite;
+    box-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff;
+}
+
+.sparkle:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+.sparkle:nth-child(2) { top: 20%; left: 80%; animation-delay: 0.5s; }
+.sparkle:nth-child(3) { top: 30%; left: 20%; animation-delay: 1s; }
+.sparkle:nth-child(4) { top: 40%; left: 90%; animation-delay: 1.5s; }
+.sparkle:nth-child(5) { top: 50%; left: 5%; animation-delay: 2s; }
+.sparkle:nth-child(6) { top: 60%; left: 70%; animation-delay: 0.3s; }
+.sparkle:nth-child(7) { top: 70%; left: 30%; animation-delay: 0.8s; }
+.sparkle:nth-child(8) { top: 80%; left: 85%; animation-delay: 1.3s; }
+.sparkle:nth-child(9) { top: 90%; left: 15%; animation-delay: 1.8s; }
+.sparkle:nth-child(10) { top: 15%; left: 60%; animation-delay: 0.2s; }
+.sparkle:nth-child(11) { top: 25%; left: 40%; animation-delay: 0.7s; }
+.sparkle:nth-child(12) { top: 35%; left: 75%; animation-delay: 1.2s; }
+.sparkle:nth-child(13) { top: 45%; left: 25%; animation-delay: 1.7s; }
+.sparkle:nth-child(14) { top: 55%; left: 95%; animation-delay: 0.4s; }
+.sparkle:nth-child(15) { top: 65%; left: 50%; animation-delay: 0.9s; }
+.sparkle:nth-child(16) { top: 75%; left: 10%; animation-delay: 1.4s; }
+.sparkle:nth-child(17) { top: 85%; left: 65%; animation-delay: 1.9s; }
+.sparkle:nth-child(18) { top: 95%; left: 35%; animation-delay: 0.1s; }
+.sparkle:nth-child(19) { top: 5%; left: 45%; animation-delay: 0.6s; }
+.sparkle:nth-child(20) { top: 45%; left: 55%; animation-delay: 1.1s; }
+
+@keyframes sparkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1) rotate(180deg);
+    }
+}
+
+/* Container chính */
+.container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.title {
+    color: #fff;
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 40px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    animation: titleGlow 2s ease-in-out infinite alternate;
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+}
+
+@keyframes titleGlow {
+    from {
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 20px #fff;
+    }
+    to {
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3), 0 0 30px #fff, 0 0 40px #fff;
+    }
+}
+
+/* Quyển sách */
+.book-container {
+    perspective: 1000px;
+    margin: 40px 0;
+}
+
+.book {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    transform-style: preserve-3d;
+    transition: transform 0.8s ease-in-out;
+}
+
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(145deg, #fff9f0, #f5e6d3);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transform-origin: left center;
+    transition: transform 0.8s ease-in-out;
+    cursor: pointer;
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+
+.page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+    pointer-events: none;
+}
+
+.page-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #333;
+    backface-visibility: hidden;
+}
+
+.page-content.front {
+    transform: rotateY(0deg);
+}
+
+.page-content.back {
+    transform: rotateY(180deg);
+    background: linear-gradient(145deg, #f5f5f5, #e8e8e8);
+}
+
+.page-content h2, .page-content h3 {
+    color: #d63384;
+    margin-bottom: 20px;
+    font-size: 2.2rem;
+    font-family: 'Caveat', cursive;
+    font-weight: 600;
+}
+
+.page-content p {
+    margin: 12px 0;
+    font-size: 1.4rem;
+    line-height: 1.7;
+    font-family: 'Indie Flower', cursive;
+}
+
+/* Trang bìa đặc biệt */
+.cover-page {
+    background: linear-gradient(145deg, #ff6b6b, #ff8e8e);
+    color: white;
+}
+
+.cover-page .page-content.front h2 {
+    color: white;
+    font-size: 2.8rem;
+    font-family: 'Dancing Script', cursive;
+    font-weight: 700;
+}
+
+.cover-page .page-content.back {
+    background: linear-gradient(145deg, #ff8e8e, #ff6b6b);
+    color: white;
+}
+
+.cover-page .page-content.back h3 {
+    color: white;
+}
+
+/* Bánh kem và nến */
+.cake {
+    position: relative;
+    width: 80px;
+    height: 60px;
+    background: linear-gradient(145deg, #ff9a9e, #fecfef);
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.candle {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 25px;
+    background: linear-gradient(145deg, #ffd700, #ffed4e);
+    border-radius: 4px;
+}
+
+.flame {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 15px;
+    background: linear-gradient(145deg, #ff6b35, #f7931e);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    animation: flicker 1s ease-in-out infinite alternate;
+}
+
+@keyframes flicker {
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) scale(1.1);
+        opacity: 0.8;
+    }
+}
+
+/* Trạng thái các trang */
+.page:nth-child(1) { z-index: 7; transform: rotateY(0deg); }
+.page:nth-child(2) { z-index: 6; transform: rotateY(0deg); }
+.page:nth-child(3) { z-index: 5; transform: rotateY(0deg); }
+.page:nth-child(4) { z-index: 4; transform: rotateY(0deg); }
+.page:nth-child(5) { z-index: 3; transform: rotateY(0deg); }
+.page:nth-child(6) { z-index: 2; transform: rotateY(0deg); }
+.page:nth-child(7) { z-index: 1; transform: rotateY(0deg); }
+
+/* Hiệu ứng lật trang */
+.page.flipped {
+    transform: rotateY(-180deg) !important;
+    z-index: 0 !important;
+}
+
+/* Khi trang được lật, mặt sau sẽ hiển thị */
+.page.flipped .page-content.front {
+    transform: rotateY(180deg);
+}
+
+.page.flipped .page-content.back {
+    transform: rotateY(0deg);
+}
+
+/* Đảm bảo hover không ảnh hưởng đến trang đã lật */
+.page.flipped:hover {
+    transform: rotateY(-180deg) !important;
+}
+
+/* Trái tim */
+.heart, .final-heart {
+    font-size: 3rem;
+    animation: heartbeat 1.5s ease-in-out infinite;
+    margin-top: 20px;
+}
+
+.final-heart {
+    font-size: 4rem;
+    animation: heartbeat 1s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+/* Nút điều khiển */
+.controls {
+    display: flex;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.btn {
+    padding: 12px 24px;
+    background: linear-gradient(145deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    background: linear-gradient(145deg, #764ba2, #667eea);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.5rem;
+        margin-bottom: 30px;
+        padding: 0 20px;
+    }
+    
+    .book {
+        width: 280px;
+        height: 380px;
+    }
+    
+    .page-content {
+        padding: 25px 20px;
+    }
+    
+    .page-content h2, .page-content h3 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+    
+    .page-content p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+        margin: 10px 0;
+    }
+    
+    .cover-page .page-content.front h2 {
+        font-size: 2.2rem;
+    }
+    
+    .cake {
+        width: 70px;
+        height: 50px;
+    }
+    
+    .heart, .final-heart {
+        font-size: 2.5rem;
+    }
+    
+    .final-heart {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .title {
+        font-size: 2rem;
+        margin-bottom: 25px;
+        padding: 0 15px;
+    }
+    
+    .book {
+        width: 250px;
+        height: 350px;
+    }
+    
+    .page-content {
+        padding: 20px 15px;
+    }
+    
+    .page-content h2, .page-content h3 {
+        font-size: 1.6rem;
+        margin-bottom: 12px;
+    }
+    
+    .page-content p {
+        font-size: 1.1rem;
+        line-height: 1.5;
+        margin: 8px 0;
+    }
+    
+    .cover-page .page-content.front h2 {
+        font-size: 1.8rem;
+    }
+    
+    .cake {
+        width: 60px;
+        height: 45px;
+    }
+    
+    .heart, .final-heart {
+        font-size: 2rem;
+    }
+    
+    .final-heart {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 360px) {
+    .title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        padding: 0 10px;
+    }
+    
+    .book {
+        width: 220px;
+        height: 320px;
+    }
+    
+    .page-content {
+        padding: 15px 10px;
+    }
+    
+    .page-content h2, .page-content h3 {
+        font-size: 1.4rem;
+        margin-bottom: 10px;
+    }
+    
+    .page-content p {
+        font-size: 1rem;
+        line-height: 1.4;
+        margin: 6px 0;
+    }
+    
+    .cover-page .page-content.front h2 {
+        font-size: 1.6rem;
+    }
+    
+    .cake {
+        width: 50px;
+        height: 40px;
+    }
+    
+    .heart, .final-heart {
+        font-size: 1.8rem;
+    }
+    
+    .final-heart {
+        font-size: 2.2rem;
+    }
+}
