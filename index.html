@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinh nhật thứ 16</title>
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(120deg, #ff6b6b, #ff8e8e, #ffb6e6, #ff8e8e, #ff6b6b);
+            background-size: 300% 300%;
+            background-position: 0% 50%;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+            animation: bgGradientMove 18s ease-in-out infinite;
+        }
+
+        @keyframes bgGradientMove {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Hiệu ứng sparkles lung linh */
+        .sparkles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .sparkle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #fff;
+            border-radius: 50%;
+            opacity: 0.7;
+            box-shadow: 0 0 10px #fff, 0 0 20px #ffb6e6;
+            animation: sparkleAnim 3s infinite;
+        }
+        /* Vị trí và delay ngẫu nhiên cho sparkles */
+        .sparkle:nth-child(1) { top: 10%; left: 15%; animation-delay: 0s; }
+        .sparkle:nth-child(2) { top: 30%; left: 70%; animation-delay: 1s; }
+        .sparkle:nth-child(3) { top: 60%; left: 25%; animation-delay: 2s; }
+        .sparkle:nth-child(4) { top: 80%; left: 80%; animation-delay: 1.5s; }
+        .sparkle:nth-child(5) { top: 50%; left: 50%; animation-delay: 0.5s; }
+        .sparkle:nth-child(6) { top: 20%; left: 85%; animation-delay: 2.2s; }
+        .sparkle:nth-child(7) { top: 75%; left: 10%; animation-delay: 1.2s; }
+        .sparkle:nth-child(8) { top: 40%; left: 40%; animation-delay: 0.8s; }
+        .sparkle:nth-child(9) { top: 65%; left: 60%; animation-delay: 1.7s; }
+        .sparkle:nth-child(10) { top: 85%; left: 30%; animation-delay: 2.5s; }
+
+        @keyframes sparkleAnim {
+            0%, 100% {
+                opacity: 0.5;
+                transform: scale(0.7) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.2) rotate(180deg);
+            }
+        }
+
+        .cinematic-sequence {
+            position: relative;
+            width: 100vw;
+            height: 40vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .font {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0.7);
+            opacity: 0;
+            margin: 0;
+            width: 100vw;
+            text-align: center;
+            font-family: 'Kalam', 'Patrick Hand', 'Caveat', cursive;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.05em;
+            animation: cinematicZoomInOut 3.2s cubic-bezier(.23,1.12,.67,.99) forwards;
+            animation-fill-mode: both;
+        }
+        #one   { animation-delay: 0.2s; margin-left: 100px;}
+        #two   { animation-delay: 3.2s; margin-right: 150px;}
+        #three { animation-delay: 6.2s; }
+        #four  { animation-delay: 9.2s; margin-left: -160px;}
+
+        .font.sparkle {
+            animation-name: cinematicZoomInOut, sparkleGlow;
+            animation-duration: 3.2s, 1.2s;
+            animation-delay: var(--delay, 0s), calc(var(--delay, 0s) + 0.2s);
+            animation-iteration-count: 1, infinite;
+            animation-fill-mode: both, both;
+        }
+
+        @keyframes cinematicZoomInOut {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.7);
+                filter: blur(6px);
+                letter-spacing: 0.2em;
+                text-shadow: none;
+            }
+            12% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.15);
+                filter: blur(0);
+                letter-spacing: 0.05em;
+                text-shadow: 0 0 16px #fff, 0 0 32px #ffb6e6, 0 0 64px #ffb6e6;
+            }
+            30%, 70% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+                filter: blur(0);
+                letter-spacing: normal;
+                text-shadow: 0 0 24px #fff, 0 0 48px #ffb6e6, 0 0 96px #ffb6e6;
+            }
+            85% {
+                opacity: 1;
+                text-shadow: 0 0 32px #fff, 0 0 64px #ffb6e6, 0 0 128px #ffb6e6;
+            }
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(1.1);
+                filter: blur(4px);
+                letter-spacing: normal;
+                text-shadow: none;
+            }
+        }
+
+        @keyframes sparkleGlow {
+            0%, 100% {
+                text-shadow: 0 0 24px #fff, 0 0 48px #ffb6e6, 0 0 96px #ffb6e6;
+            }
+            50% {
+                text-shadow: 0 0 48px #fff, 0 0 96px #ffb6e6, 0 0 128px #fff;
+            }
+        }
+
+        /* Thêm hiệu ứng cho nút xuất hiện sau cùng */
+        .next-btn {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 28px 80px;
+            font-size: 2.2rem;
+            font-family: 'Kalam', 'Patrick Hand', cursive;
+            color: #fff;
+            background: linear-gradient(90deg, #ff6b6b, #ffb6e6);
+            border: none;
+            border-radius: 48px;
+            box-shadow: 0 8px 48px 0 #ffb6e6, 0 0 0 6px #fffde4;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s cubic-bezier(.23,1.12,.67,.99), box-shadow 0.3s, background 0.3s;
+            z-index: 100;
+            letter-spacing: 0.08em;
+            font-weight: 700;
+            outline: none;
+            text-shadow: 0 2px 8px #ffb6e6, 0 0 2px #ff6b6b;
+        }
+        .next-btn.show {
+            opacity: 1;
+            pointer-events: auto;
+            animation: btnFadeIn 1.2s cubic-bezier(.23,1.12,.67,.99);
+        }
+        .next-btn:hover, .next-btn:focus {
+            box-shadow: 0 12px 64px 0 #ffb6e6, 0 0 0 8px #fffde4;
+            background: linear-gradient(90deg, #ffb6e6, #ff6b6b);
+            color: #fffde4;
+        }
+        @keyframes btnFadeIn {
+            from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        @media (max-width: 800px) {
+            .font {
+                font-size: 2rem;
+                width: 90vw;
+                max-width: 90vw;
+                padding: 0 8vw;
+            }
+            .cinematic-sequence {
+                height: 30vh;
+            }
+            .next-btn {
+                font-size: 1.2rem;
+                padding: 16px 32px;
+                border-radius: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="sparkles">
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+        <div class="sparkle"></div>
+    </div>
+    <div class="cinematic-sequence">
+        <h1 class="font sparkle" id="one" style="--delay:0.2s">21/7/2025</h1>
+        <h1 class="font sparkle" id="two" style="--delay:3.2s">Là ngày đặc biệt</h1>
+        <h1 class="font sparkle" id="three" style="--delay:6.2s">Ngày mà</h1>
+        <h1 class="font sparkle" id="four" style="--delay:9.2s">Em bé Trâm lên tuổi thứ 16</h1>
+    </div>
+    <button class="next-btn" id="nextBtn">Tiếp tục</button>
+    <script>
+    // Hiện nút sau khi hiệu ứng chữ kết thúc (tổng thời gian 12.5s + 0.7s buffer)
+    setTimeout(function() {
+        document.getElementById('nextBtn').classList.add('show');
+    }, 13500);
+    // Thêm sự kiện click cho nút để chuyển trang
+    document.getElementById('nextBtn').onclick = function() { window.location.href = 'thiep.html'; };
+    </script>
+</body>
+</html>
