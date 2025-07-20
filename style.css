@@ -461,3 +461,6 @@ body {
         font-size: 2.2rem;
     }
 }
+.page img{
+    height: 100px;
+}
