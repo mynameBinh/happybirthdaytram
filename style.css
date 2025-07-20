@@ -620,8 +620,7 @@ body {
 /* Responsive */
 @media (max-width: 768px) {
     .title {
-        font-size: 2.9rem;
-        font-weight: bold;
+        font-size: 2.7rem;
         margin-bottom: 30px;
         padding: 0 20px;
     }
