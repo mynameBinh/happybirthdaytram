@@ -61,38 +61,133 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Thêm hiệu ứng confetti khi mở trang cuối
     function addConfetti() {
-        const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3'];
+        const colors = ['#ff6b6b', '#ff8e8e', '#ff9a9e', '#fecfef', '#ffd700', '#ffed4e'];
+        const shapes = ['💖', '💕', '💗', '💓', '💝', '✨', '🌟'];
         
-        for (let i = 0; i < 50; i++) {
+        // Hiệu ứng confetti hình tròn
+        for (let i = 0; i < 80; i++) {
             setTimeout(() => {
                 const confetti = document.createElement('div');
                 confetti.style.position = 'fixed';
-                confetti.style.width = '10px';
-                confetti.style.height = '10px';
+                confetti.style.width = Math.random() * 8 + 6 + 'px';
+                confetti.style.height = confetti.style.width;
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.left = Math.random() * window.innerWidth + 'px';
-                confetti.style.top = '-10px';
+                confetti.style.top = '-20px';
                 confetti.style.borderRadius = '50%';
                 confetti.style.pointerEvents = 'none';
                 confetti.style.zIndex = '1000';
-                confetti.style.animation = 'confettiFall 3s linear forwards';
+                confetti.style.boxShadow = '0 0 10px rgba(255,255,255,0.5)';
+                confetti.style.animation = `confettiFall ${Math.random() * 2 + 3}s linear forwards`;
                 
                 document.body.appendChild(confetti);
                 
                 setTimeout(() => {
                     confetti.remove();
-                }, 3000);
-            }, i * 100);
+                }, 5000);
+            }, i * 50);
         }
+        
+        // Hiệu ứng emoji rơi
+        for (let i = 0; i < 30; i++) {
+            setTimeout(() => {
+                const emoji = document.createElement('div');
+                emoji.style.position = 'fixed';
+                emoji.style.fontSize = Math.random() * 20 + 20 + 'px';
+                emoji.style.left = Math.random() * window.innerWidth + 'px';
+                emoji.style.top = '-50px';
+                emoji.style.pointerEvents = 'none';
+                emoji.style.zIndex = '1001';
+                emoji.style.animation = `emojiFall ${Math.random() * 3 + 4}s ease-in-out forwards`;
+                emoji.textContent = shapes[Math.floor(Math.random() * shapes.length)];
+                
+                document.body.appendChild(emoji);
+                
+                setTimeout(() => {
+                    emoji.remove();
+                }, 7000);
+            }, i * 200);
+        }
+        
+        // Hiệu ứng pháo hoa
+        setTimeout(() => {
+            createFirework();
+        }, 1000);
+        
+        setTimeout(() => {
+            createFirework();
+        }, 2000);
+        
+        setTimeout(() => {
+            createFirework();
+        }, 3000);
+    }
+    
+    // Tạo hiệu ứng pháo hoa
+    function createFirework() {
+        const firework = document.createElement('div');
+        firework.style.position = 'fixed';
+        firework.style.left = Math.random() * window.innerWidth + 'px';
+        firework.style.top = Math.random() * (window.innerHeight * 0.7) + 'px';
+        firework.style.width = '4px';
+        firework.style.height = '4px';
+        firework.style.backgroundColor = '#ffd700';
+        firework.style.borderRadius = '50%';
+        firework.style.pointerEvents = 'none';
+        firework.style.zIndex = '1002';
+        firework.style.animation = 'firework 2s ease-out forwards';
+        
+        document.body.appendChild(firework);
+        
+        setTimeout(() => {
+            firework.remove();
+        }, 2000);
     }
 
     // Thêm CSS animation cho confetti
     const style = document.createElement('style');
     style.textContent = `
         @keyframes confettiFall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
                 opacity: 0;
+            }
+        }
+        
+        @keyframes emojiFall {
+            0% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(50vh) rotate(180deg) scale(1.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg) scale(0.8);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes firework {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+                box-shadow: 0 0 5px #ffd700;
+            }
+            50% {
+                transform: scale(20);
+                opacity: 0.8;
+                box-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700;
+            }
+            100% {
+                transform: scale(40);
+                opacity: 0;
+                box-shadow: 0 0 50px #ffd700, 0 0 100px #ffd700;
             }
         }
     `;
