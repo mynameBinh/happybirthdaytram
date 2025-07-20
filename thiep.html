@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <audio id="bg-music" src="dieuanhmuon.mp3" autoplay loop hidden></audio>
     <!-- Hiệu ứng cầu vồng nền -->
     <div class="rainbow-bg"></div>
     
@@ -147,5 +148,11 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+window.addEventListener('DOMContentLoaded', function() {
+    const music = document.getElementById('bg-music');
+    music.play();
+});
+</script>
 </body>
 </html>
