@@ -10,6 +10,7 @@
 </head>
 <body>
     <audio id="bg-music" src="dieuanhmuon.mp3" autoplay loop hidden></audio>
+    <button id="music-toggle-btn" aria-label="Bật/Tắt nhạc" style="position:fixed;top:100px;right:18px;z-index:9999;width:48px;height:48px;border-radius:50%;background:rgba(255,107,107,0.92);border:none;box-shadow:0 2px 12px #ffb6e6;display:flex;align-items:center;justify-content:center;transition:background 0.3s;cursor:pointer;font-size:1.6rem;color:#fff;outline:none;"><span id="music-icon">&#127925;</span></button>
     <!-- Hiệu ứng cầu vồng nền -->
     <div class="rainbow-bg"></div>
     
@@ -149,9 +150,45 @@
 
     <script src="script.js"></script>
     <script>
+const music = document.getElementById('bg-music');
+const btn = document.getElementById('music-toggle-btn');
+const icon = document.getElementById('music-icon');
+let isPlaying = !music.paused;
+
+function updateBtn() {
+    if (isPlaying) {
+        btn.style.background = 'rgba(76,220,196,0.92)';
+        icon.textContent = '🔊';
+        btn.title = 'Tắt nhạc';
+    } else {
+        btn.style.background = 'rgba(255,107,107,0.92)';
+        icon.textContent = '🔇';
+        btn.title = 'Bật nhạc';
+    }
+}
+
+btn.addEventListener('click', function() {
+    if (isPlaying) {
+        music.pause();
+        isPlaying = false;
+    } else {
+        music.play();
+        isPlaying = true;
+    }
+    updateBtn();
+});
+
+music.addEventListener('play', function() {
+    isPlaying = true;
+    updateBtn();
+});
+music.addEventListener('pause', function() {
+    isPlaying = false;
+    updateBtn();
+});
+
 window.addEventListener('DOMContentLoaded', function() {
-    const music = document.getElementById('bg-music');
-    music.play();
+    updateBtn();
 });
 </script>
 </body>
