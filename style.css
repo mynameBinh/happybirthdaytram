@@ -5,11 +5,15 @@
 }
 
 body {
-    font-family: 'Caveat', 'Dancing Script', 'Indie Flower', cursive;
+    font-family: 'Kalam', 'Patrick Hand', 'Caveat', cursive;
     background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
     min-height: 100vh;
     overflow-x: hidden;
     position: relative;
+}
+
+.title, h1, h2, h3, h4, h5, h6, .page-content, .btn {
+    font-family: 'Kalam', 'Patrick Hand', 'Caveat', cursive !important;
 }
 
 /* Hiệu ứng cầu vồng nền */
@@ -623,6 +627,7 @@ body {
         font-size: 2.7rem;
         margin-bottom: 30px;
         padding: 0 20px;
+        font-family: 'Kalam', 'Patrick Hand', 'Caveat', cursive !important;
     }
     
     .book {
@@ -661,6 +666,9 @@ body {
     .final-heart {
         font-size: 3rem;
     }
+    .page-content, .btn, h1, h2, h3, h4, h5, h6 {
+        font-family: 'Kalam', 'Patrick Hand', 'Caveat', cursive !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -668,6 +676,7 @@ body {
         font-size: 2rem;
         margin-bottom: 25px;
         padding: 0 15px;
+        font-family: 'Kalam', 'Patrick Hand', 'Caveat', cursive !important;
     }
     
     .book {
@@ -705,6 +714,9 @@ body {
     
     .final-heart {
         font-size: 2.5rem;
+    }
+    .page-content, .btn, h1, h2, h3, h4, h5, h6 {
+        font-family: 'Kalam', 'Patrick Hand', 'Caveat', cursive !important;
     }
 }
 
